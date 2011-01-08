@@ -1,0 +1,48 @@
+
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="Products.Clouseau">
+
+  <browser:page
+      for="*"
+      name="web_dmd"
+      permission="zope2.Public"
+      template="skins/ZenPacks.jhanson.Clouseau/clouseau_view.cpt"
+      />
+
+  <browser:page
+      for="*"
+      name="clouseau_list"
+      permission="zope2.Public"
+      template="skins/ZenPacks.jhanson.Clouseau/clouseau_list.pt"
+      />
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Products.Clouseau"
+      directory="profiles/default"
+      description="Installs the Products.Clouseau package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <!-- register the resource-->
+  <browser:resourceDirectory
+      name="clouseau"
+      directory="resources"
+      />
+
+  <!-- javascript included on every page -->
+  <browser:viewlet
+      name="js-clouseau-trigger"
+      paths="/++resource++clouseau/js/clouseau_trigger.js"
+      weight="100"
+      manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+      class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+      permission="zope2.Public"
+      />
+</configure>

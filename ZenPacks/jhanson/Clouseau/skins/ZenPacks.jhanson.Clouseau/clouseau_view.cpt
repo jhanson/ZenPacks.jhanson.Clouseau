@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      i18n:domain="clouseau">
+
+<body style="background-color:white;">
+    <div>
+
+        <span metal:define-macro="title">
+        <!-- <h2>Clouseau Session</h2> -->
+            <!-- <a href="placeholder" tal:attributes="href string:/zport/dmd/clouseau_list" class="link-parent"> -->
+            <!--     Up to session list -->
+            <!-- </a> -->
+        </span>
+        <span metal:define-macro="prompt">
+            <link rel="stylesheet" type="text/css"
+            href="/++resource++zenui/js/livegrid/resources/css/ext-ux-livegrid.css"/>
+        <link rel="stylesheet" type="text/css"
+            href="/++resource++zenui/css/xtheme-zenoss.css" />
+        <link rel="stylesheet" type="text/css"
+            href="/++resource++zenui/css/zenoss.css" />
+        <link rel="stylesheet" type="text/css"
+            href="/++resource++zenui/css/zenui3.css" />
+            <link rel="stylesheet" type="text/css"
+
+            href="/++resource++extjs/resources/css/ext-all.css" />
+            <tal:block tal:content="structure provider:js-security"/>
+            <tal:block tal:content="structure provider:all-js"/>
+            <script tal:define="container context/getPrimaryParent" tal:content="string:
+            Zenoss.env.PARENT_CONTEXT = '${container/absolute_url_path}';
+            " tal:on-error="string:"></script>
+            <link rel="stylesheet" type="text/css"
+            href="/++resource++clouseau/css/SyntaxHighlighter.css" />
+            <link rel="stylesheet" type="text/css"
+            href="/++resource++clouseau/css/clouseau-frame.css" />
+            <script type="text/javascript" src="/++resource++clouseau/js/sarissa.js"></script>
+            <script type="text/javascript" src="/++resource++clouseau/js/shCore.js"></script>
+            <script type="text/javascript" src="/++resource++clouseau/js/shClouseau.js"></script>
+            <script type="text/javascript" src="/++resource++clouseau/js/cssQuery.js"></script>
+            <script type="text/javascript" src="/++resource++clouseau/js/shBrushPython.js"></script>
+            <script type="text/javascript" src="/++resource++clouseau/js/process.js"></script>
+            <script type="text/javascript" src="/++resource++clouseau/js/ui.js"></script>
+
+
+
+            <p class="portalMessage" id="clouseau-warning">
+                This is a javascript intensive application and something went wrong. Either 1) you do not have javascript enabled or 2) the Javascript to initialize Clouseau failed and a Javascript error has occurred.
+            </p>
+            <tal:block condition="context/clouseau_tool/enabled">
+                <a name="focuspoint" id="focuspoint"></a>
+                <form onSubmit="javascript: return false;" id="form">
+                    <table class="output-table" id="output-table">
+                    <tr id="input-row">
+                        <td class="line-number">&nbsp;&nbsp;</td>
+                        <td><code id="input-prompt" class="clouseau-prompt">>>></code></td>
+                        <td id="input-td">
+                            <input type="text" id="input-field"
+                            size="80" onKeyDown="return inputKeydown(event);"
+                            onKeyUp="return inputKeyup(event);">
+
+                        </td>
+                    </tr>
+                    <tr class="border">
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <span class="discreet">
+                                <span id="autocomplete-start"></span><span id="autocomplete-rest"></span>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <dl id="tip-output" class="discreet">
+                            </dl>
+                        </td>
+                    </tr>
+                    </table>
+                </form>
+            </tal:block>
+        </span>
+        <span metal:define-macro="footer">
+
+                <tal:block condition="context/clouseau_tool/enabled">
+                    <div id="message-wrapper">
+                        <p class="discreet">
+                            <b>Session <span id="session-id">1</span></b> |
+                            <b>Status</b> <span id="message"></span> <br />
+                            <!-- <b>Commands</b> -->
+                            <!-- <a href="#" id="session-delete" title="Finish and delete this session"> <img src="++resource++clouseau/img/delete_icon.gif"  /> Delete</a> -->
+                            <!-- <a href="#" id="session-xml-link" title="Link to xml for this session"> <img src="++resource++clouseau/img/xml.gif"  /> XML</a> -->
+                            <!-- <a href="" id="session-link" title="Link to (or reload) this session" > -->
+                            <!--     <img src="++resource++clouseau/img/clouseau.png" /> <span>Link</span></a> -->
+                            <!-- <a href="#" id="session-text-link" title="Link to text dump for this session"><img height="16" width="16" src="++resource++clouseau/img/document_icon.gif" > Text</a> -->
+                            <!-- <a href="#" onClick="clouseauChange(''); return false;" title="Show all lines in this session"><img src="++resource++clouseau/img/add_alternative_icon.gif" > Show</a> -->
+                            <!-- <a href="#" onClick="clouseauChange('none'); return false;" title="Hide previous lines in this session"><img height="16" width="16" src="++resource++clouseau/img/download_icon.gif"  /> Hide</a> -->
+                            <!-- <a href="#" id="session-save" title="Save this session" ><img src="++resource++clouseau/img/save_all.png"  /> Save</a> -->
+
+
+                        </p>
+                        <a name="footer-focus"></a>
+                    </div>
+                </tal:block>
+
+        </span>
+        <tal:block condition="not: context/clouseau_tool/enabled">
+            <p>
+                <img src="++resource++clouseau/img/button_cancel.png" style="float: left; padding: 2em;" />
+                <b>The inspector is not enabled</b>. There are settings in the
+                file <em>config.py</em>. If you don't want to read the <em>readme.txt</em>
+                about these settings then please note: <em>By default Clouseau will only
+                be enabled if you run Zope with debug-mode turned on</em>.
+            </p>
+        </tal:block>
+    </div>
+</body>
+</html>

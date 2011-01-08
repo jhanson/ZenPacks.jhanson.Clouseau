@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/prefs_main_template/macros/master"
+      i18n:domain="clouseau">
+
+<body>
+    <span metal:fill-slot="prefs_configlet_main">
+		<h2>Clouseau help</h2>
+		<a href="/plone_control_panel" tal:attributes="href string:${context/portal_url}/clouseau_list" class="link-parent">
+            Back to session list
+        </a>
+
+        <p>Clouseau is a Zope and Plone debugger and introspector. It
+            allows you to interact with Plone and alter it without being
+            encumbered by security restrictions. It provides a Python prompt
+            that is connected to the Zope database and contains all the objects
+            from your Plone site. This is equivalent to a zopectl or PloneShell
+            prompt.
+        </p>
+        <dl>
+            <dt>What about security?</dt>
+            <dd>Clouseau is a hole in the standard security model, but not everyone
+                considers that a valid model anymore. Certainly it allows a Plone
+                user with the Manager role to do anything to your site. But they
+                really could anyway. There are few things in the readme.txt that you
+                can tweak but at the default setting:
+                <ul>
+                    <li>Only users with the Plone Manager role can use this</li>
+                    <li>If your site is <em>not</em> running in debug mode, Clouseau will
+                        be completely inactive and disabled</li>
+                </ul>
+            </dd>
+            <dt>I'm still worried about security</dt>
+            <dd>Give it a try on your test sandbox or development site. See how useful
+                it is. Then leave it on your development sites, don't put it on your 
+                live production sites, that's fine. It's really a <em>development tool</em>.</dd>
+            <dt>How do I use it?</dt>
+            <dd>Go to the <em>Plone Control Panel</em> and click on Clouseau. This
+                will list all the active sessions which you can join or delete. For
+                now just create a new session. You'll get a web based Python prompt.</dd>
+            <dt>What do I do next?</dt>
+            <dd>Type in a Python command for example <code>portal.objectIds()</code> or
+                <code>portal.portal_catalog()[:5]</code>. The possiblities are endless, when
+                you type these commands you'll see tool tips fly by explaining what things 
+                are. Useful eh?
+            </dd>
+
+            <dt>Can I delete my plone site with this?</dt>
+            <dd>Sure try: <code>app.manage_delObjects(["Plone",]); 
+                utils.commit()</code>. Woohoo.</dd>
+            <dt>So this is cool, but why do this in the web?</dt>
+            <dd>Many developers spend their time in Plone
+                so this allows you to access debugging and introspection quickly
+                and simply. There a few other neat things:
+                <ul>
+                    <li>Cross platform, works on everything (including windows)</li>
+                    <li>Zero dependencies</li>
+                    <li>No ZEO required</li>
+                    <li>2 or more people can connect to one session. 
+                        Collaborative debugging at it's finest.</li>
+                    <li>A context sensitive Plone prompt. When looking at a content 
+                        object (eg: front-page) look for the little magnifying glass 
+                        in the document actions (just to the right of the print). This
+                        will bring you a Python prompt. Try typing <code>context.meta_type</code>
+                        </li>
+                </ul>
+                </dd>
+            <dl>
+            <h2>Features</h2>
+            <dl>
+                <dt>Extended tooltip support</dt>
+                <dd>You'll need DocFinderTab installed for all the details, more useful than a dir.</dd>
+                <dt>Up and down</dt>
+                <dd>When you are in a prompt, try the <em>up</em> or <em>down</em> arrows
+                    to scroll through commands you've written.</dd>
+                <dt>What if I change something?</dt>
+                <dd>You are in a transaction, so you can commit it once you've done something.
+                    We've written a useful little module called <code>utils</code> for that which
+                    contains some useful methods <code>utils.commit()</code> and so on. That one
+                    command will commit the transaction.
+                </dd>
+                <dt>Saving sessions</dt>
+                <dd>Nothing worse than writing a lot in a session and then losing it, no fear, click
+                    the save button to get it onto the filesystem. You can load sessions back from the 
+                    filesystem, or directly through the web. Where sessions are saved to is shown
+                    on the main Clouseau view.</dd>
+            </dl>
+        <p>This is mostly written and maintained by Andy McKay, mail me at 
+            <a href="mailto:andy@clearwind.ca">andy@clearwind.ca</a>, with help and 
+            support from many. New releases, bugs and features are at 
+            <a href="http://plone.org/products/clouseau">plone.org</a>.</p>
+        <p>Hope this helps.</p>
+    </span>
+</body>
+</html>

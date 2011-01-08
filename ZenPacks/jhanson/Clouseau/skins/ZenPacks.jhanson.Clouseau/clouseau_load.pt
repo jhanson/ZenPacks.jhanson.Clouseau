@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      i18n:domain="clouseau">
+
+<body>
+        <span metal:define-macro="loads" tal:define="tool context/clouseau_tool">
+            <form method="get" action="" tal:attributes="action string: ${tool/absolute_url}/clouseau_view">
+                   <fieldset>
+                       <legend>Load an old session</legend>
+               
+            <ul>
+            <li
+                tal:repeat="filename python: tool.list_saved_sessions(short=True)">
+                <a href=""
+                   class="sessionid"
+                   tal:attributes="href string: ${tool/absolute_url}/clouseau_view?filename=$filename"><span tal:content="filename"></span></a><br />
+            </li>
+            </ul>
+            <p class="discreet">
+                The sessions are stored on the file system. If you have multiple ZEO clients, this could be a problem. 
+                To edit, rename, delete sessions please use file system tools. Sessions are loaded from
+                these directories in this order:</p> 
+                <ul><li tal:repeat="dr context/clouseau_tool/list_save_directories"><em class="discreet" tal:content="dr" /></li></ul>
+                <p tal:condition="not:context/clouseau_tool/can_save_session" class="discreet">
+                   <b>Warning:</b> you do not currently have permissions to the save sessions. You would need to go and give those to the directories above. <b>Trying to save sessions will cause errors.</b>
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>Load a session from a URL</legend>
+                <div class="field">
+                    <label for="filename">URL</label>
+                    <div class="formHelp"><b>Warning:</b> loading in code from a random URL, without 
+                        first being sure what's there is not a good idea. You'd be crazy if you didn't know
+                        what site you were connecting to.</div>
+                    <input type="text" name="filename" value="http://" />
+                </div>
+                <div class="field">
+                    <input type="submit" class="context" value="load" />
+                </div>
+
+                </fieldset>
+            </form>
+        </span>
+</body>
+</html>
