@@ -21,19 +21,19 @@ Ext.onReady(function () {
         win.show();
     }
 
-    // // add the glass icon to the bottom of the page
-    // Ext.ComponentMgr.onAvailable('footer_bar', function(config) {
-    //     config.items = config.items || [];
-    //     config.items.push({
-    //         xtype: 'button',
-    //         id: 'show_inspector',
-    //         icon: '/++resource++clouseau/img/clouseau.png',
-    //         handler: function(button) {
-    //             toggleClouseau();
-    //         }
-    //     });
+    // add the glass icon to the bottom of the page
+    Ext.ComponentMgr.onAvailable('footer_bar', function(config) {
+        config.items = config.items || [];
+        config.items.push({
+            xtype: 'button',
+            id: 'show_inspector',
+            icon: '/++resource++clouseau/img/clouseau.png',
+            handler: function(button) {
+                toggleClouseau();
+            }
+        });
 
-    //     config.items.push('-');
-    // });
+        config.items.push('-');
+    });
 
 });
