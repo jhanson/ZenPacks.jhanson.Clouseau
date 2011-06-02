@@ -171,9 +171,12 @@ function getSession() {
         };
     };
     req.open("POST", "clouseau_tool/new_session_xml", true);
-    if (parent && parent.window.Zenoss.env.PARENT_CONTEXT){
+    if (parent && parent.window.Zenoss.env.device_uid) {
+        _context = parent.window.parent.window.Zenoss.env.device_uid;
+    }else if (parent && parent.window.Zenoss.env.PARENT_CONTEXT){
         _context = parent.window.parent.window.Zenoss.env.PARENT_CONTEXT;
     }
+
 
     if (_context == null) {
         req.send("");

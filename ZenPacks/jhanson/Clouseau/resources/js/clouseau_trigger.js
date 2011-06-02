@@ -1,6 +1,5 @@
 Ext.onReady(function () {
 
-
     function toggleClouseau(){
         var win;
         if (Ext.getCmp('clouseauWindow')){
